@@ -26,12 +26,14 @@ class CalendarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Table(
-      border: tableBorder,
-      children: [
-        ..._buildCalendarDays(context),
-        if (dowVisible) _buildDaysOfWeek(context),
-      ],
+    return Container(
+      child: Table(
+        border: tableBorder,
+        children: [
+          ..._buildCalendarDays(context),
+          if (dowVisible) _buildDaysOfWeek(context),
+        ],
+      ),
     );
   }
 
