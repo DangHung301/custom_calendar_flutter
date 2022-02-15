@@ -19,17 +19,25 @@ class _TableEventsExampleState extends State<TableEventsExample> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   RangeSelectionMode _rangeSelectionMode = RangeSelectionMode
       .toggledOff; // Can be toggled on/off by longpressing a date
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
-  DateTime? _rangeStart;
-  DateTime? _rangeEnd;
+  // DateTime _focusedDay = DateTime.now();
+  // DateTime? _selectedDay;
+  // DateTime? _rangeStart;
+  // DateTime? _rangeEnd;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //
+  //   _selectedDay = _focusedDay;
+  //   _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+  // }
 
   @override
   void initState() {
     super.initState();
 
-    _selectedDay = _focusedDay;
-    _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+    stream.selectedDay = stream.focusedDay;
+    _selectedEvents = ValueNotifier(_getEventsForDay(stream.selectedDay!));
   }
 
   @override
@@ -52,13 +60,27 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     ];
   }
 
+  // void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+  //   if (!isSameDay(_selectedDay, selectedDay)) {
+  //     setState(() {
+  //       _selectedDay = selectedDay;
+  //       _focusedDay = focusedDay;
+  //       _rangeStart = null; // Important to clean those
+  //       _rangeEnd = null;
+  //       _rangeSelectionMode = RangeSelectionMode.toggledOff;
+  //     });
+  //
+  //     _selectedEvents.value = _getEventsForDay(selectedDay);
+  //   }
+  // }
+
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-    if (!isSameDay(_selectedDay, selectedDay)) {
+    if (!isSameDay(stream.selectedDay, selectedDay)) {
       setState(() {
-        _selectedDay = selectedDay;
-        _focusedDay = focusedDay;
-        _rangeStart = null; // Important to clean those
-        _rangeEnd = null;
+        stream.selectedDay = selectedDay;
+        stream.focusedDay = focusedDay;
+        stream.rangeStart = null; // Important to clean those
+        stream.rangeEnd = null;
         _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
 
@@ -66,12 +88,21 @@ class _TableEventsExampleState extends State<TableEventsExample> {
     }
   }
 
+  // void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
+  //   setState(() {
+  //     _selectedDay = null;
+  //     _focusedDay = focusedDay;
+  //     _rangeStart = start;
+  //     _rangeEnd = end;
+  //     _rangeSelectionMode = RangeSelectionMode.toggledOn;
+  //   });
+
   void _onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
     setState(() {
-      _selectedDay = null;
-      _focusedDay = focusedDay;
-      _rangeStart = start;
-      _rangeEnd = end;
+      stream.selectedDay = null;
+      stream.focusedDay = focusedDay;
+      stream.rangeStart = start;
+      stream.rangeEnd = end;
       _rangeSelectionMode = RangeSelectionMode.toggledOn;
     });
 
@@ -98,10 +129,10 @@ class _TableEventsExampleState extends State<TableEventsExample> {
             TableCalendar<Event>(
               firstDay: kFirstDay,
               lastDay: kLastDay,
-              focusedDay: _focusedDay,
-              selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-              rangeStartDay: _rangeStart,
-              rangeEndDay: _rangeEnd,
+              focusedDay: stream.focusedDay,
+              selectedDayPredicate: (day) => isSameDay(stream.selectedDay, day),
+              rangeStartDay: stream.rangeStart,
+              rangeEndDay: stream.rangeEnd,
               calendarFormat: CalendarFormat.week,
               rangeSelectionMode: _rangeSelectionMode,
               eventLoader: _getEventsForDay,
@@ -121,7 +152,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
               //   }
               // },
               onPageChanged: (focusedDay) {
-                _focusedDay = focusedDay;
+                stream.focusedDay = focusedDay;
               },
             ),
             const SizedBox(height: 8.0),

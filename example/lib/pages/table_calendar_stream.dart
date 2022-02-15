@@ -1,12 +1,13 @@
 import 'dart:async';
 
-class TableCalendarStream {
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
-  DateTime? _rangeStart;
-  DateTime? _rangeEnd;
+class
+
+TableCalendarStream {
+  DateTime focusedDay = DateTime.now();
+  DateTime? selectedDay;
+  DateTime? rangeStart;
+  DateTime? rangeEnd;
 
   StreamController<DateTime> _streamController = StreamController<DateTime>();
-
 
 }
