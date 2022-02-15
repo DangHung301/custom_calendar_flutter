@@ -172,12 +172,12 @@ class CalendarStyle {
       fontSize: 16.0,
     ), //
     this.todayDecoration = const BoxDecoration(
-      color: const Color(0xFF9FA8DA),
+      color: Color(0xFF9FA8DA),
       shape: BoxShape.circle,
     ),
     this.selectedTextStyle = const TextStyle(
       color: const Color(0xFFFAFAFA),
-      fontSize: 16.0,
+      fontSize: 16.0 ,
     ),
     this.selectedDecoration = const BoxDecoration(
       color: const Color(0xFF7966FF),
@@ -208,13 +208,13 @@ class CalendarStyle {
     this.holidayTextStyle = const TextStyle(color: const Color(0xFF5C6BC0)),
     this.holidayDecoration = const BoxDecoration(
       border: const Border.fromBorderSide(
-        const BorderSide(color: const Color(0xFF7966FF), width: 1.4),
+        const BorderSide(color: const Color(0xFF9FA8DA), width: 1.4),
       ),
       shape: BoxShape.circle,
     ),
-    this.weekendTextStyle = const TextStyle(color: const Color(0xFF5A5A5A)),
+    this.weekendTextStyle = const TextStyle(color: const Color(0xFFA2AEBD), fontSize: 16),
     this.weekendDecoration = const BoxDecoration(shape: BoxShape.circle),
-    this.defaultTextStyle = const TextStyle(),
+    this.defaultTextStyle = const TextStyle(fontSize: 16 ,color: const Color(0xFF3D5586)),
     this.defaultDecoration = const BoxDecoration(shape: BoxShape.circle),
     this.rowDecoration = const BoxDecoration(),
     this.tableBorder = const TableBorder(),

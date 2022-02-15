@@ -79,7 +79,7 @@ class CalendarCore extends StatelessWidget {
           tableBorder: tableBorder,
           dowBuilder: (context, day) {
             return SizedBox(
-              height: 30,
+              height: 42,
               child: dowBuilder?.call(context, day),
             );
           },
